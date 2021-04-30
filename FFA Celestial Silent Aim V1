@@ -1,4 +1,4 @@
-warn(
+--[[ // CREDITS \\--
 
     YESOK FOR DEVELOPMENT
 https://v3rmillion.net/member.php?action=profile&uid=514695
@@ -8,7 +8,7 @@ https://v3rmillion.net/member.php?action=profile&uid=557102
 
     CRISHOUX FOR STRUCID/NERF-FPS FUNCTIONS
 https://v3rmillion.net/member.php?action=profile&uid=490270
-)
+--]]
 
 warn("Loading...")
 
