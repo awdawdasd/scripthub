@@ -1,0 +1,101 @@
+local R = 255
+local G = 255
+local B = 255
+
+local plrs = game:GetService("Players")
+local lplr = game:GetService("Players").LocalPlayer
+
+f = {}
+local espforlder
+
+--[[f.removehats = function()
+    pcall(function()
+
+for i,v in pairs(game.Players:GetChildren()) do
+    if v and v.Name ~= game.Players.LocalPlayer.Name and v.Team.Name ~= game.Players.LocalPlayer.Team.Name then
+        for i,x in pairs(v.Character:GetChildren()) do
+            if x.ClassName == "Accessory" and x:WaitForChild("Handle") then
+                x:Destroy()
+            end
+        end
+    end
+end
+
+    end)
+end
+]]
+f.addesp = function()
+    pcall(function()
+       
+        
+        if espforlder then
+            espforlder:Destroy()
+            espforlder = Instance.new("Folder")
+            espforlder.Parent = game.Workspace.CurrentCamera
+            espforlder.Name = "ItemESP"
+        else
+            espforlder = Instance.new("Folder")
+            espforlder.Parent = game.Workspace.CurrentCamera
+            espforlder.Name = "ItemESP"
+        end
+        
+        
+        for i, v in pairs(espforlder:GetChildren()) do
+            v:Destroy()
+        end
+        
+        
+        for _, plr in pairs(plrs:GetChildren()) do
+            if plr.Character and plr.Character.Humanoid.Health > 0 and plr.Name ~= lplr.Name then
+
+                if plr.Team.Name ~= plrs.LocalPlayer.Team.Name  then
+                    local e = espforlder:FindFirstChild(plr.Name)
+                    if not e then
+                        local fold = Instance.new("Folder", espforlder)
+                        fold.Name = plr.Name
+
+                        for i, p in pairs(plr.Character:GetChildren()) do
+                            if p:IsA("BasePart") and p.Name ~= "HumanoidRootPart" then
+                                local urmom = Instance.new("BoxHandleAdornment")
+                                local urdad = Instance.new("BoxHandleAdornment")
+
+                                urmom.ZIndex = 9
+                                urmom.AlwaysOnTop = true
+                                urmom.Color3 = Color3.fromRGB(R,G,B)
+                                urmom.Size = p.Size
+                                urmom.Adornee = p
+                                urmom.Name = tick()
+                                urmom.Transparency = 0.9
+                                urmom.Parent = fold
+
+                                urdad.ZIndex = 10
+                                urdad.AlwaysOnTop = false
+                                urdad.Color3 = Color3.fromRGB(R,G,B)
+                                urdad.Size = p.Size + Vector3.new(0.0675,0.0675,0.0675)
+                                urdad.Adornee = p
+                                urdad.Name = tick()
+                                urdad.Transparency = 0
+                                urdad.Parent = fold
+
+                            end
+                        end
+                        plr.Character.Humanoid.Died:Connect(function()
+                            fold:Destroy()
+                        end)
+                    end
+                end
+            end
+        end
+    end)
+end
+--f.removehats()
+f.addesp()
+
+delay(0, function()
+    while wait(5) do
+        pcall(function()
+          --  f.removehats()
+            f.addesp()
+        end)
+    end
+end)
