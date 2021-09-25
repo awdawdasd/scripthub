@@ -65,7 +65,7 @@ f.addesp = function()
                                 urmom.Size = p.Size
                                 urmom.Adornee = p
                                 urmom.Name = tick()
-                                urmom.Transparency = 0.9
+                                urmom.Transparency = 0.825
                                 urmom.Parent = fold
 
                                 urdad.ZIndex = 10
